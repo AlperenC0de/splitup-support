@@ -1,50 +1,3 @@
-// Smooth scrolling for navigation links
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            target.scrollIntoView({
-                behavior: 'smooth',
-                block: 'start'
-            });
-        }
-    });
-});
-
-// Contact form handler
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const name = document.getElementById('name').value;
-    const email = document.getElementById('email').value;
-    const message = document.getElementById('message').value;
-    
-    // Create mailto link with form data
-    const subject = `SplitUp Support Request from ${name}`;
-    const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
-    const mailtoLink = `mailto:split.up.1.0.0@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
-    
-    // Open email client
-    window.location.href = mailtoLink;
-    
-    // Show success message
-    alert('Thank you for your message! Your email client will now open to send the message.');
-    
-    // Reset form
-    this.reset();
-});
-
-// Add scroll effect to navbar
-window.addEventListener('scroll', function() {
-    const navbar = document.querySelector('.navbar');
-    if (window.scrollY > 50) {
-        navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
-    } else {
-        navbar.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
-    }
-});
-
 // Screenshot carousel functionality
 let currentSlide = 0;
 const totalSlides = 9;
@@ -54,15 +7,22 @@ function updateCarousel() {
     const items = document.querySelectorAll('.screenshot-item');
     const dots = document.querySelectorAll('.dot');
     
+    if (!items.length) return;
+    
     items.forEach((item, index) => {
+        // Remove all classes
         item.classList.remove('active', 'prev', 'next', 'hidden');
+        item.style.display = 'none';
         
         if (index === currentSlide) {
             item.classList.add('active');
+            item.style.display = 'block';
         } else if (index === (currentSlide - 1 + totalSlides) % totalSlides) {
             item.classList.add('prev');
+            item.style.display = 'block';
         } else if (index === (currentSlide + 1) % totalSlides) {
             item.classList.add('next');
+            item.style.display = 'block';
         } else {
             item.classList.add('hidden');
         }
@@ -98,13 +58,66 @@ function resetAutoSlide() {
     startAutoSlide();
 }
 
-// Initialize carousel
+// Smooth scrolling for navigation links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+            });
+        }
+    });
+});
+
+// Contact form handler
+const contactForm = document.getElementById('contactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const name = document.getElementById('name').value;
+        const email = document.getElementById('email').value;
+        const message = document.getElementById('message').value;
+        
+        // Create mailto link with form data
+        const subject = `SplitUp Support Request from ${name}`;
+        const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0A%0D%0AMessage:%0D%0A${message}`;
+        const mailtoLink = `mailto:split.up.1.0.0@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+        
+        // Open email client
+        window.location.href = mailtoLink;
+        
+        // Show success message
+        alert('Thank you for your message! Your email client will now open to send the message.');
+        
+        // Reset form
+        this.reset();
+    });
+}
+
+// Add scroll effect to navbar
+window.addEventListener('scroll', function() {
+    const navbar = document.querySelector('.navbar');
+    if (navbar) {
+        if (window.scrollY > 50) {
+            navbar.style.boxShadow = '0 2px 10px rgba(0, 0, 0, 0.1)';
+        } else {
+            navbar.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
+        }
+    }
+});
+
+// Initialize carousel when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize carousel
     updateCarousel();
     startAutoSlide();
     
     // Add click handlers to screenshot items
-    document.querySelectorAll('.screenshot-item').forEach((item, index) => {
+    document.querySelectorAll('.screenshot-item').forEach((item) => {
         item.addEventListener('click', () => {
             if (item.classList.contains('prev')) {
                 prevSlide();
@@ -115,10 +128,8 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
     });
-});
-
-// Pause auto-slide on hover
-document.addEventListener('DOMContentLoaded', function() {
+    
+    // Pause auto-slide on hover
     const showcase = document.querySelector('.screenshots-showcase');
     if (showcase) {
         showcase.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
@@ -142,17 +153,19 @@ const observer = new IntersectionObserver(function(entries) {
 }, observerOptions);
 
 // Add animation to feature cards
-document.querySelectorAll('.feature-card').forEach(card => {
-    card.style.opacity = '0';
-    card.style.transform = 'translateY(20px)';
-    card.style.transition = 'opacity 0.5s, transform 0.5s';
-    observer.observe(card);
-});
+document.addEventListener('DOMContentLoaded', function() {
+    document.querySelectorAll('.feature-card').forEach(card => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(20px)';
+        card.style.transition = 'opacity 0.5s, transform 0.5s';
+        observer.observe(card);
+    });
 
-// Add animation to steps
-document.querySelectorAll('.step').forEach((step, index) => {
-    step.style.opacity = '0';
-    step.style.transform = 'translateY(20px)';
-    step.style.transition = `opacity 0.5s ${index * 0.1}s, transform 0.5s ${index * 0.1}s`;
-    observer.observe(step);
+    // Add animation to steps
+    document.querySelectorAll('.step').forEach((step, index) => {
+        step.style.opacity = '0';
+        step.style.transform = 'translateY(20px)';
+        step.style.transition = `opacity 0.5s ${index * 0.1}s, transform 0.5s ${index * 0.1}s`;
+        observer.observe(step);
+    });
 });
