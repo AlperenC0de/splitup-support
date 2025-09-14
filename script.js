@@ -45,35 +45,47 @@ window.addEventListener('scroll', function() {
     }
 });
 
-// Screenshot slider functionality
+// Screenshot carousel functionality
 let currentSlide = 0;
-const screenshotsPerView = 3;
-const totalScreenshots = 9;
-const totalSlides = Math.ceil(totalScreenshots / screenshotsPerView);
+const totalSlides = 9;
 let autoSlideInterval;
 
-function updateSlider() {
-    const track = document.querySelector('.screenshots-track');
+function updateCarousel() {
+    const items = document.querySelectorAll('.screenshot-item');
     const dots = document.querySelectorAll('.dot');
     
-    if (track) {
-        const slideWidth = window.innerWidth > 768 ? 33.333 : 100;
-        track.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+    items.forEach((item, index) => {
+        item.classList.remove('active', 'prev', 'next', 'hidden');
         
-        dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === currentSlide);
-        });
-    }
+        if (index === currentSlide) {
+            item.classList.add('active');
+        } else if (index === (currentSlide - 1 + totalSlides) % totalSlides) {
+            item.classList.add('prev');
+        } else if (index === (currentSlide + 1) % totalSlides) {
+            item.classList.add('next');
+        } else {
+            item.classList.add('hidden');
+        }
+    });
+    
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentSlide);
+    });
 }
 
 function nextSlide() {
     currentSlide = (currentSlide + 1) % totalSlides;
-    updateSlider();
+    updateCarousel();
+}
+
+function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateCarousel();
 }
 
 function goToSlide(slideIndex) {
     currentSlide = slideIndex;
-    updateSlider();
+    updateCarousel();
     resetAutoSlide();
 }
 
@@ -86,23 +98,33 @@ function resetAutoSlide() {
     startAutoSlide();
 }
 
-// Initialize slider
+// Initialize carousel
 document.addEventListener('DOMContentLoaded', function() {
-    updateSlider();
+    updateCarousel();
     startAutoSlide();
     
-    // Add click handlers to dots
-    document.querySelectorAll('.dot').forEach((dot, index) => {
-        dot.addEventListener('click', () => goToSlide(index));
+    // Add click handlers to screenshot items
+    document.querySelectorAll('.screenshot-item').forEach((item, index) => {
+        item.addEventListener('click', () => {
+            if (item.classList.contains('prev')) {
+                prevSlide();
+                resetAutoSlide();
+            } else if (item.classList.contains('next')) {
+                nextSlide();
+                resetAutoSlide();
+            }
+        });
     });
 });
 
 // Pause auto-slide on hover
-const sliderContainer = document.querySelector('.screenshots-slider');
-if (sliderContainer) {
-    sliderContainer.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-    sliderContainer.addEventListener('mouseleave', startAutoSlide);
-}
+document.addEventListener('DOMContentLoaded', function() {
+    const showcase = document.querySelector('.screenshots-showcase');
+    if (showcase) {
+        showcase.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+        showcase.addEventListener('mouseleave', startAutoSlide);
+    }
+});
 
 // Animate elements on scroll
 const observerOptions = {
