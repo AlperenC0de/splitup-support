@@ -45,6 +45,65 @@ window.addEventListener('scroll', function() {
     }
 });
 
+// Screenshot slider functionality
+let currentSlide = 0;
+const screenshotsPerView = 3;
+const totalScreenshots = 9;
+const totalSlides = Math.ceil(totalScreenshots / screenshotsPerView);
+let autoSlideInterval;
+
+function updateSlider() {
+    const track = document.querySelector('.screenshots-track');
+    const dots = document.querySelectorAll('.dot');
+    
+    if (track) {
+        const slideWidth = window.innerWidth > 768 ? 33.333 : 100;
+        track.style.transform = `translateX(-${currentSlide * slideWidth}%)`;
+        
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === currentSlide);
+        });
+    }
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSlider();
+}
+
+function goToSlide(slideIndex) {
+    currentSlide = slideIndex;
+    updateSlider();
+    resetAutoSlide();
+}
+
+function startAutoSlide() {
+    autoSlideInterval = setInterval(nextSlide, 4000);
+}
+
+function resetAutoSlide() {
+    clearInterval(autoSlideInterval);
+    startAutoSlide();
+}
+
+// Initialize slider
+document.addEventListener('DOMContentLoaded', function() {
+    updateSlider();
+    startAutoSlide();
+    
+    // Add click handlers to dots
+    document.querySelectorAll('.dot').forEach((dot, index) => {
+        dot.addEventListener('click', () => goToSlide(index));
+    });
+});
+
+// Pause auto-slide on hover
+const sliderContainer = document.querySelector('.screenshots-slider');
+if (sliderContainer) {
+    sliderContainer.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+    sliderContainer.addEventListener('mouseleave', startAutoSlide);
+}
+
 // Animate elements on scroll
 const observerOptions = {
     threshold: 0.1,
