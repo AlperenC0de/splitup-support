@@ -1,62 +1,62 @@
-// Screenshot carousel functionality
-let currentSlide = 0;
-const totalSlides = 9;
+// Carousel functionality
+let slideIndex = 1;
 let autoSlideInterval;
 
-function updateCarousel() {
-    const items = document.querySelectorAll('.screenshot-item');
-    const dots = document.querySelectorAll('.dot');
-    
-    if (!items.length) return;
-    
-    items.forEach((item, index) => {
-        // Remove all classes
-        item.classList.remove('active', 'prev', 'next', 'hidden');
-        item.style.display = 'none';
-        
-        if (index === currentSlide) {
-            item.classList.add('active');
-            item.style.display = 'block';
-        } else if (index === (currentSlide - 1 + totalSlides) % totalSlides) {
-            item.classList.add('prev');
-            item.style.display = 'block';
-        } else if (index === (currentSlide + 1) % totalSlides) {
-            item.classList.add('next');
-            item.style.display = 'block';
-        } else {
-            item.classList.add('hidden');
-        }
-    });
-    
-    dots.forEach((dot, index) => {
-        dot.classList.toggle('active', index === currentSlide);
-    });
-}
-
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % totalSlides;
-    updateCarousel();
-}
-
-function prevSlide() {
-    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-    updateCarousel();
-}
-
-function goToSlide(slideIndex) {
-    currentSlide = slideIndex;
-    updateCarousel();
+function moveSlide(n) {
+    showSlide(slideIndex += n);
     resetAutoSlide();
 }
 
+function currentSlide(n) {
+    showSlide(slideIndex = n);
+    resetAutoSlide();
+}
+
+function showSlide(n) {
+    const slides = document.querySelectorAll('.carousel-slide');
+    const dots = document.querySelectorAll('.dot');
+    
+    if (!slides.length) return;
+    
+    if (n > slides.length) { slideIndex = 1 }
+    if (n < 1) { slideIndex = slides.length }
+    
+    const track = document.querySelector('.carousel-track');
+    if (track) {
+        track.style.transform = `translateX(-${(slideIndex - 1) * 100}%)`;
+    }
+    
+    dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === slideIndex - 1);
+    });
+}
+
+function autoSlide() {
+    slideIndex++;
+    showSlide(slideIndex);
+}
+
 function startAutoSlide() {
-    autoSlideInterval = setInterval(nextSlide, 4000);
+    autoSlideInterval = setInterval(autoSlide, 4000);
 }
 
 function resetAutoSlide() {
     clearInterval(autoSlideInterval);
     startAutoSlide();
 }
+
+// Initialize carousel
+document.addEventListener('DOMContentLoaded', function() {
+    showSlide(slideIndex);
+    startAutoSlide();
+    
+    // Pause on hover
+    const carousel = document.querySelector('.carousel-container');
+    if (carousel) {
+        carousel.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
+        carousel.addEventListener('mouseleave', startAutoSlide);
+    }
+});
 
 // Smooth scrolling for navigation links
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -107,33 +107,6 @@ window.addEventListener('scroll', function() {
         } else {
             navbar.style.boxShadow = '0 1px 3px rgba(0, 0, 0, 0.1)';
         }
-    }
-});
-
-// Initialize carousel when DOM is ready
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize carousel
-    updateCarousel();
-    startAutoSlide();
-    
-    // Add click handlers to screenshot items
-    document.querySelectorAll('.screenshot-item').forEach((item) => {
-        item.addEventListener('click', () => {
-            if (item.classList.contains('prev')) {
-                prevSlide();
-                resetAutoSlide();
-            } else if (item.classList.contains('next')) {
-                nextSlide();
-                resetAutoSlide();
-            }
-        });
-    });
-    
-    // Pause auto-slide on hover
-    const showcase = document.querySelector('.screenshots-showcase');
-    if (showcase) {
-        showcase.addEventListener('mouseenter', () => clearInterval(autoSlideInterval));
-        showcase.addEventListener('mouseleave', startAutoSlide);
     }
 });
 

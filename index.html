@@ -37,60 +37,51 @@
                 </div>
             </div>
             <div class="hero-screenshots">
-                <div class="screenshots-container">
-                    <div class="screenshots-showcase">
-                        <button class="slider-btn prev" onclick="prevSlide()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="15 18 9 12 15 6"></polyline>
-                            </svg>
-                        </button>
-                        <div class="screenshots-wrapper">
-                            <div class="screenshot-item" data-index="0">
+                <div class="carousel-container">
+                    <button class="carousel-btn prev" onclick="moveSlide(-1)">‹</button>
+                    <div class="carousel-wrapper">
+                        <div class="carousel-track">
+                            <div class="carousel-slide">
                                 <img src="images/1.png" alt="SplitUp Screenshot 1">
                             </div>
-                            <div class="screenshot-item" data-index="1">
+                            <div class="carousel-slide">
                                 <img src="images/2.png" alt="SplitUp Screenshot 2">
                             </div>
-                            <div class="screenshot-item" data-index="2">
+                            <div class="carousel-slide">
                                 <img src="images/3.png" alt="SplitUp Screenshot 3">
                             </div>
-                            <div class="screenshot-item" data-index="3">
+                            <div class="carousel-slide">
                                 <img src="images/4.png" alt="SplitUp Screenshot 4">
                             </div>
-                            <div class="screenshot-item" data-index="4">
+                            <div class="carousel-slide">
                                 <img src="images/5.png" alt="SplitUp Screenshot 5">
                             </div>
-                            <div class="screenshot-item" data-index="5">
+                            <div class="carousel-slide">
                                 <img src="images/6.png" alt="SplitUp Screenshot 6">
                             </div>
-                            <div class="screenshot-item" data-index="6">
+                            <div class="carousel-slide">
                                 <img src="images/7.png" alt="SplitUp Screenshot 7">
                             </div>
-                            <div class="screenshot-item" data-index="7">
+                            <div class="carousel-slide">
                                 <img src="images/8.png" alt="SplitUp Screenshot 8">
                             </div>
-                            <div class="screenshot-item" data-index="8">
+                            <div class="carousel-slide">
                                 <img src="images/9.png" alt="SplitUp Screenshot 9">
                             </div>
                         </div>
-                        <button class="slider-btn next" onclick="nextSlide()">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="9 18 15 12 9 6"></polyline>
-                            </svg>
-                        </button>
                     </div>
-                    <div class="slider-dots">
-                        <span class="dot active" onclick="goToSlide(0)"></span>
-                        <span class="dot" onclick="goToSlide(1)"></span>
-                        <span class="dot" onclick="goToSlide(2)"></span>
-                        <span class="dot" onclick="goToSlide(3)"></span>
-                        <span class="dot" onclick="goToSlide(4)"></span>
-                        <span class="dot" onclick="goToSlide(5)"></span>
-                        <span class="dot" onclick="goToSlide(6)"></span>
-                        <span class="dot" onclick="goToSlide(7)"></span>
-                        <span class="dot" onclick="goToSlide(8)"></span>
-                    </div>
-                    <a href="gallery.html" class="view-all-link">View All Screenshots →</a>
+                    <button class="carousel-btn next" onclick="moveSlide(1)">›</button>
+                </div>
+                <div class="carousel-dots">
+                    <span class="dot active" onclick="currentSlide(1)"></span>
+                    <span class="dot" onclick="currentSlide(2)"></span>
+                    <span class="dot" onclick="currentSlide(3)"></span>
+                    <span class="dot" onclick="currentSlide(4)"></span>
+                    <span class="dot" onclick="currentSlide(5)"></span>
+                    <span class="dot" onclick="currentSlide(6)"></span>
+                    <span class="dot" onclick="currentSlide(7)"></span>
+                    <span class="dot" onclick="currentSlide(8)"></span>
+                    <span class="dot" onclick="currentSlide(9)"></span>
                 </div>
             </div>
         </div>
