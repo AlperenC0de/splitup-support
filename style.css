@@ -168,8 +168,8 @@ body {
 }
 
 .carousel-slide img {
-    max-width: 250px;
-    max-height: 450px;
+    max-width: 320px;
+    max-height: 550px;
     width: auto;
     height: auto;
     object-fit: contain;
@@ -235,8 +235,8 @@ body {
 
 @media (max-width: 768px) {
     .carousel-slide img {
-        max-width: 200px;
-        max-height: 350px;
+        max-width: 260px;
+        max-height: 420px;
     }
     
     .carousel-btn {
