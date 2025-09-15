@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hesap Silme - SplitUp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .delete-account-container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 40px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        
+        .warning-box {
+            background: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .warning-box h3 {
+            color: #856404;
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+        
+        .warning-box p {
+            color: #856404;
+            margin: 0;
+            line-height: 1.5;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+            color: #333;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4285f4;
+        }
+        
+        .checkbox-group {
+            margin: 30px 0;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+            margin-right: 10px;
+        }
+        
+        .checkbox-group label {
+            display: flex;
+            align-items: center;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            width: 100%;
+        }
+        
+        .delete-btn:hover:not(:disabled) {
+            background: #c82333;
+        }
+        
+        .delete-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #4285f4;
+            text-decoration: none;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .success-message,
+        .error-message {
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .success-message {
+            background: #d4edda;
+            border: 1px solid #c3e6cb;
+            color: #155724;
+        }
+        
+        .error-message {
+            background: #f8d7da;
+            border: 1px solid #f5c6cb;
+            color: #721c24;
+        }
+        
+        .loading {
+            display: none;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .loading-spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #4285f4;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="logo">
+                    <img src="logo.png" alt="SplitUp Logo" class="logo-img">
+                    <span>SplitUp</span>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="delete-account-container">
+            <a href="index.html" class="back-link">← Ana Sayfaya Dön</a>
+            
+            <h1>Hesap Silme</h1>
+            
+            <div class="warning-box">
+                <h3>⚠️ Dikkat!</h3>
+                <p>Hesabınızı sildiğinizde aşağıdaki verileriniz kalıcı olarak silinecektir:</p>
+                <ul style="margin: 10px 0; padding-left: 20px;">
+                    <li>Kullanıcı profil bilgileriniz</li>
+                    <li>Oluşturduğunuz tüm gruplar</li>
+                    <li>Eklediğiniz tüm harcamalar</li>
+                    <li>Hesap ayarlarınız</li>
+                </ul>
+                <p><strong>Bu işlem geri alınamaz!</strong></p>
+            </div>
+
+            <div class="success-message" id="successMessage">
+                Hesabınız başarıyla silindi. SplitUp'ı kullandığınız için teşekkür ederiz.
+            </div>
+
+            <div class="error-message" id="errorMessage">
+                Hesap silme işleminde bir hata oluştu. Lütfen tekrar deneyin.
+            </div>
+
+            <div class="loading" id="loading">
+                <div class="loading-spinner"></div>
+                <p>Hesabınız siliniyor, lütfen bekleyin...</p>
+            </div>
+
+            <form id="deleteAccountForm">
+                <div class="form-group">
+                    <label for="email">E-posta Adresiniz *</label>
+                    <input type="email" id="email" name="email" required 
+                           placeholder="SplitUp hesabınızın e-posta adresi">
+                </div>
+
+                <div class="form-group">
+                    <label for="reason">Hesabınızı neden siliyorsunuz? (Opsiyonel)</label>
+                    <textarea id="reason" name="reason" rows="4" 
+                              placeholder="Geri bildiriminiz ürünümüzü geliştirmemize yardımcı olur"></textarea>
+                </div>
+
+                <div class="checkbox-group">
+                    <label>
+                        <input type="checkbox" id="confirmDelete" required>
+                        Bu işlemin geri alınamaz olduğunu anlıyorum ve hesabımı silmek istiyorum.
+                    </label>
+                </div>
+
+                <button type="submit" class="delete-btn" id="deleteButton" disabled>
+                    Hesabımı Sil
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <img src="logo.png" alt="SplitUp Logo" class="logo-img">
+                    <span>SplitUp</span>
+                </div>
+                <p>&copy; 2024 SplitUp. All rights reserved.</p>
+                <div class="footer-links">
+                    <a href="privacy-policy.md">Privacy Policy</a>
+                    <a href="#">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const confirmCheckbox = document.getElementById('confirmDelete');
+        const deleteButton = document.getElementById('deleteButton');
+        const deleteForm = document.getElementById('deleteAccountForm');
+        const loading = document.getElementById('loading');
+        const successMessage = document.getElementById('successMessage');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // Checkbox durumuna göre butonu aktif/pasif yap
+        confirmCheckbox.addEventListener('change', function() {
+            deleteButton.disabled = !this.checked;
+        });
+
+        // Form submit işlemi
+        deleteForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const reason = document.getElementById('reason').value;
+            
+            if (!email) {
+                alert('Lütfen e-posta adresinizi girin.');
+                return;
+            }
+            
+            if (!confirmCheckbox.checked) {
+                alert('Lütfen onay kutusunu işaretleyin.');
+                return;
+            }
+
+            // Loading durumunu göster
+            loading.style.display = 'block';
+            deleteForm.style.display = 'none';
+            successMessage.style.display = 'none';
+            errorMessage.style.display = 'none';
+
+            try {
+                // Firebase Function'ı çağır
+                const response = await fetch('https://us-central1-split-up-438011.cloudfunctions.net/deleteUserAccount', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        email: email,
+                        reason: reason
+                    })
+                });
+
+                const result = await response.json();
+
+                if (response.ok) {
+                    // Başarılı
+                    loading.style.display = 'none';
+                    successMessage.style.display = 'block';
+                } else {
+                    // Hata
+                    throw new Error(result.error || 'Bilinmeyen hata');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                loading.style.display = 'none';
+                errorMessage.textContent = 'Hesap silme işleminde bir hata oluştu: ' + error.message;
+                errorMessage.style.display = 'block';
+                deleteForm.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>
