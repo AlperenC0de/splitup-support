@@ -165,9 +165,7 @@ Our Service may contain links to third-party websites or integrate with third-pa
 
 For questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:
 
-**Email:** privacy@splitup.app  
-**Address:** [Company Address]  
-**Data Protection Officer:** dpo@splitup.app
+**Email:** split.up.1.0.0@gmail.com
 
 For users in the European Union, you have the right to lodge a complaint with your local data protection authority.
 
