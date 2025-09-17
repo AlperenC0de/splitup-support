@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hesap Silme - SplitUp</title>
+    <title>Delete Account - SplitUp</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -170,57 +170,57 @@
 
     <div class="container">
         <div class="delete-account-container">
-            <a href="index.html" class="back-link">← Ana Sayfaya Dön</a>
+            <a href="index.html" class="back-link">← Back to Home</a>
             
-            <h1>Hesap Silme</h1>
+            <h1>Delete Account</h1>
             
             <div class="warning-box">
-                <h3>⚠️ Dikkat!</h3>
-                <p>Hesabınızı sildiğinizde aşağıdaki verileriniz kalıcı olarak silinecektir:</p>
+                <h3>⚠️ Warning!</h3>
+                <p>When you delete your account, the following data will be permanently deleted:</p>
                 <ul style="margin: 10px 0; padding-left: 20px;">
-                    <li>Kullanıcı profil bilgileriniz</li>
-                    <li>Oluşturduğunuz tüm gruplar</li>
-                    <li>Eklediğiniz tüm harcamalar</li>
-                    <li>Hesap ayarlarınız</li>
+                    <li>Your user profile information</li>
+                    <li>All groups you created</li>
+                    <li>All expenses you added</li>
+                    <li>Your account settings</li>
                 </ul>
-                <p><strong>Bu işlem geri alınamaz!</strong></p>
+                <p><strong>This action cannot be undone!</strong></p>
             </div>
 
             <div class="success-message" id="successMessage">
-                Hesabınız başarıyla silindi. SplitUp'ı kullandığınız için teşekkür ederiz.
+                Your account has been successfully deleted. Thank you for using SplitUp.
             </div>
 
             <div class="error-message" id="errorMessage">
-                Hesap silme işleminde bir hata oluştu. Lütfen tekrar deneyin.
+                An error occurred while deleting your account. Please try again.
             </div>
 
             <div class="loading" id="loading">
                 <div class="loading-spinner"></div>
-                <p>Hesabınız siliniyor, lütfen bekleyin...</p>
+                <p>Your account is being deleted, please wait...</p>
             </div>
 
             <form id="deleteAccountForm">
                 <div class="form-group">
-                    <label for="email">E-posta Adresiniz *</label>
+                    <label for="email">Your Email Address *</label>
                     <input type="email" id="email" name="email" required 
-                           placeholder="SplitUp hesabınızın e-posta adresi">
+                           placeholder="Your SplitUp account email address">
                 </div>
 
                 <div class="form-group">
-                    <label for="reason">Hesabınızı neden siliyorsunuz? (Opsiyonel)</label>
+                    <label for="reason">Why are you deleting your account? (Optional)</label>
                     <textarea id="reason" name="reason" rows="4" 
-                              placeholder="Geri bildiriminiz ürünümüzü geliştirmemize yardımcı olur"></textarea>
+                              placeholder="Your feedback helps us improve our product"></textarea>
                 </div>
 
                 <div class="checkbox-group">
                     <label>
                         <input type="checkbox" id="confirmDelete" required>
-                        Bu işlemin geri alınamaz olduğunu anlıyorum ve hesabımı silmek istiyorum.
+                        I understand that this action cannot be undone and I want to delete my account.
                     </label>
                 </div>
 
                 <button type="submit" class="delete-btn" id="deleteButton" disabled>
-                    Hesabımı Sil
+                    Delete My Account
                 </button>
             </form>
         </div>
@@ -263,12 +263,12 @@
             const reason = document.getElementById('reason').value;
             
             if (!email) {
-                alert('Lütfen e-posta adresinizi girin.');
+                alert('Please enter your email address.');
                 return;
             }
             
             if (!confirmCheckbox.checked) {
-                alert('Lütfen onay kutusunu işaretleyin.');
+                alert('Please check the confirmation box.');
                 return;
             }
 
@@ -299,12 +299,12 @@
                     successMessage.style.display = 'block';
                 } else {
                     // Hata
-                    throw new Error(result.error || 'Bilinmeyen hata');
+                    throw new Error(result.error || 'Unknown error');
                 }
             } catch (error) {
                 console.error('Error:', error);
                 loading.style.display = 'none';
-                errorMessage.textContent = 'Hesap silme işleminde bir hata oluştu: ' + error.message;
+                errorMessage.textContent = 'An error occurred while deleting your account: ' + error.message;
                 errorMessage.style.display = 'block';
                 deleteForm.style.display = 'block';
             }

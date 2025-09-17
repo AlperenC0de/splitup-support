@@ -1,74 +1,74 @@
-# Gizlilik Politikası
+# Privacy Policy
 
-Son güncellenme tarihi: 15 Eylül 2025
+Last updated: September 15, 2025
 
-Bu gizlilik politikası, kişisel verilerinizin nasıl toplandığını, kullanıldığını ve korunduğunu açıklar.
+This privacy policy explains how personal information is collected, used, and protected.
 
-## Toplanan Bilgiler
+## Information We Collect
 
-### Otomatik Olarak Toplanan Bilgiler
-- IP adresi
-- Tarayıcı türü ve versiyonu
-- İşletim sistemi
-- Erişim tarihi ve saati
-- Ziyaret edilen sayfalar
+### Automatically Collected Information
+- IP address
+- Browser type and version
+- Operating system
+- Access date and time
+- Visited pages
 
-### Kullanıcı Tarafından Sağlanan Bilgiler
-- İletişim formları aracılığıyla verilen bilgiler
-- E-posta adresi (varsa)
-- Kullanıcı yorumları (varsa)
+### User-Provided Information
+- Information provided through contact forms
+- Email address (if provided)
+- User comments (if any)
 
-## Bilgilerin Kullanımı
+## Use of Information
 
-Toplanan bilgiler şu amaçlarla kullanılır:
-- Hizmet kalitesini artırmak
-- Teknik sorunları gidermek
-- İstatistiksel analizler yapmak
-- Güvenlik önlemlerini sağlamak
+Collected information is used for the following purposes:
+- Improve service quality
+- Resolve technical issues
+- Conduct statistical analysis
+- Provide security measures
 
-## Bilgi Paylaşımı
+## Information Sharing
 
-Kişisel bilgileriniz:
-- Üçüncü taraflarla satılmaz, kiralanmaz veya paylaşılmaz
-- Sadece yasal zorunluluklar durumında yetkili makamlara verilebilir
-- Hizmet sağlayıcılarımızla (hosting, analitik) sınırlı olarak paylaşılabilir
+Your personal information:
+- Is not sold, rented, or shared with third parties
+- May only be provided to authorized authorities when legally required
+- May be shared with our service providers (hosting, analytics) on a limited basis
 
-## Çerezler (Cookies)
+## Cookies
 
-Bu site çerezler kullanabilir:
-- Oturum çerezleri (geçici)
-- Kalıcı çerezler (tercih kayıtları için)
-- Analitik çerezler (site kullanım istatistikleri için)
+This site may use cookies:
+- Session cookies (temporary)
+- Persistent cookies (for preference storage)
+- Analytics cookies (for site usage statistics)
 
-Çerezleri tarayıcı ayarlarınızdan devre dışı bırakabilirsiniz.
+You can disable cookies through your browser settings.
 
-## Veri Güvenliği
+## Data Security
 
-Verilerinizin güvenliği için:
-- SSL şifreleme kullanılır
-- Güvenli sunucularda saklanır
-- Düzenli güvenlik güncellemeleri yapılır
-- Erişim kontrolleri uygulanır
+To ensure the security of your data:
+- SSL encryption is used
+- Data is stored on secure servers
+- Regular security updates are performed
+- Access controls are implemented
 
-## Haklarınız
+## Your Rights
 
-Kişisel verilerinizle ilgili haklarınız:
-- Bilgi talep etme hakkı
-- Düzeltme hakkı
-- Silme hakkı (unutulma hakkı)
-- İşlemeyi sınırlama hakkı
-- Veri taşınabilirliği hakkı
+Your rights regarding personal data:
+- Right to request information
+- Right to correction
+- Right to deletion (right to be forgotten)
+- Right to restrict processing
+- Right to data portability
 
-## İletişim
+## Contact
 
-Bu gizlilik politikası ile ilgili sorularınız için:
-- E-posta: [email@example.com]
-- Adres: [Adres bilgisi]
+For questions regarding this privacy policy:
+- Email: [email@example.com]
+- Address: [Address information]
 
-## Değişiklikler
+## Changes
 
-Bu gizlilik politikası gerektiğinde güncellenebilir. Önemli değişiklikler kullanıcılara bildirilecektir.
+This privacy policy may be updated when necessary. Significant changes will be notified to users.
 
-## Uygulanabilir Hukuk
+## Applicable Law
 
-Bu politika Türkiye Cumhuriyeti yasalarına tabidir ve KVKK (Kişisel Verilerin Korunması Kanunu) ile uyumludur.
+This policy is subject to the laws of the Republic of Turkey and complies with KVKK (Personal Data Protection Law).
