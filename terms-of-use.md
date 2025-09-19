@@ -37,8 +37,8 @@ SplitUp offers both free and premium subscription tiers. Premium features are av
 
 ### 4.2 Subscription Details
 **Premium Subscription Options:**
-- **Monthly Plan:** $4.99 per month
-- **Annual Plan:** $39.99 per year (save 33%)
+- **Weekly Plan:** $3.99 per week
+- **Annual Plan:** $29.99 per year (save 85%)
 
 ### 4.3 Auto-Renewal
 Your subscription will automatically renew at the end of each subscription period unless you cancel it at least 24 hours before the renewal date. Your payment method will be charged at the then-current subscription rate.
